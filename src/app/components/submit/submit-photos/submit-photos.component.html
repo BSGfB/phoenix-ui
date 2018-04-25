@@ -1,0 +1,14 @@
+<div class="submit-form">
+
+  <div class="add">
+    <input type="file" accept="image/*" style="display:none;" (change)="onFileChange($event)" #file>
+    <button mat-fab color="primary" (click)="file.click()"><mat-icon>add</mat-icon></button>
+  </div>
+
+
+  <mat-grid-list [cols]="2" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let url of photos">
+      <img class="form-image" [src]="url">
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

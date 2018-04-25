@@ -1,0 +1,35 @@
+<div class="submit-form">
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Title">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-select placeholder="Select category">
+      <mat-option value="category1">Category 1</mat-option>
+      <mat-option value="category2">Category 2</mat-option>
+      <mat-option value="category2">Category 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-select value="sell">
+      <mat-option value="sell">Sell</mat-option>
+      <mat-option value="buy">Buy</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Description"></textarea>
+  </mat-form-field>
+
+  <div class="row full-width">
+    <mat-form-field>
+      <input matInput placeholder="Rubles" type="number" min="0"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Pennies" type="number" min="0"/>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="accent" onclick="">Next</button>
+</div>

@@ -1,0 +1,22 @@
+<mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
+  <mat-step [completed]="true">
+    <ng-template matStepLabel>Photos</ng-template>
+    <app-submit-photos></app-submit-photos>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Description</ng-template>
+    <app-submit-description></app-submit-description>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Location</ng-template>
+    <app-location></app-location>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>About the seller</ng-template>
+    <app-submit-about></app-submit-about>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Submit</ng-template>
+    <app-submit-submit></app-submit-submit>
+  </mat-step>
+</mat-horizontal-stepper>

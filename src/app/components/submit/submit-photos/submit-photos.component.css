@@ -1,0 +1,15 @@
+.submit-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.form-image {
+  width: 250px;
+}
+
+.add {
+  text-align: center;
+  margin-bottom: 15px;
+}

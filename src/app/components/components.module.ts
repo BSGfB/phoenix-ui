@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from './index';
-import { CategoriesModule } from './categories/categories.module';
+import { SubmitModule } from './submit/submit.module';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [],
-  exports: [CoreModule, CategoriesModule]
+  declarations: [SubmitModule],
+  exports: [SubmitModule]
 })
 export class ComponentsModule {
 }
