@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SubmitComponent } from './submit/submit.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
-import { SubmitModule } from '../components';
+import { SubmitModule, CoreModule } from '../components';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { SubmitComponent, PageNotFoundComponent, LoginComponent, RegistrationComponent, ProfileComponent } from './index';
 
 @NgModule({
   imports: [
@@ -20,10 +20,14 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatInputModule,
     SubmitModule,
-    MatCardModule
+    CoreModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ],
-  declarations: [SubmitComponent, PageNotFoundComponent, HeaderComponent],
-  exports: [SubmitComponent, PageNotFoundComponent, HeaderComponent]
+  declarations: [SubmitComponent, PageNotFoundComponent, LoginComponent, RegistrationComponent, ProfileComponent],
+  exports: [SubmitComponent, PageNotFoundComponent, LoginComponent]
 })
 export class ContainersModule {
 }

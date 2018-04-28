@@ -35,7 +35,8 @@ import {
     SubmitSubmitComponent,
     SubmitPhotosComponent
   ],
-  exports: [SubmitDescriptionComponent,
+  exports: [
+    SubmitDescriptionComponent,
     SubmitLocationComponent,
     SubmitAboutComponent,
     SubmitSubmitComponent,

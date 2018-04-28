@@ -5,14 +5,17 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainersModule } from './containers/containers.module';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent, SubmitComponent } from './containers';
+import { LoginComponent, PageNotFoundComponent, ProfileComponent, SubmitComponent } from './containers';
 import { HttpClientModule } from '@angular/common/http';
-import { FileUploadService } from './service/file-upload.service';
+import { FileUploadService, AuthService, AuthGuardService } from './service';
+import { CoreModule } from './components';
 
 
 const appRoutes: Routes = [
-  {path: 'submit', component: SubmitComponent},
-  {path: '**', component: PageNotFoundComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'submit', component: SubmitComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  {path: '**', redirectTo: 'profile'}
 ];
 
 @NgModule({
@@ -21,15 +24,16 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      appRoutes/*,
+      {enableTracing: true} // <-- debugging purposes only*/
     ),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ContainersModule
+    ContainersModule,
+    CoreModule
   ],
-  providers: [FileUploadService],
+  providers: [FileUploadService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
