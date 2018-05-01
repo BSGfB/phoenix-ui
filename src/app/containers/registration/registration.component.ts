@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../service/common.service';
+import { FileUploadService } from '../../service';
 
 @Component({
   selector: 'app-registration',
@@ -9,12 +10,15 @@ import { CommonService } from '../../service/common.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  public activeRegionId: number;
   public regions;
   public form: FormGroup;
   private formSubmitAttempt: boolean;
 
+
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private fileUploadService: FileUploadService
   ) {
   }
 
@@ -22,6 +26,9 @@ export class RegistrationComponent implements OnInit {
     this.commonService.findAllRegions().subscribe(value => this.regions = value);
 
     this.form = new FormGroup({
+      photo: new FormControl('', [
+        Validators.required
+      ]),
       firstName: new FormControl('', [
         Validators.required
       ]),
@@ -39,11 +46,27 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(6)
       ]),
-      regions: new FormControl('', [
+      cityId: new FormControl('', [
         Validators.required
+      ]),
+      gender: new FormControl('', [
+        Validators.required
+      ]),
+      phones: new FormArray([
+        new FormControl('', [
+          Validators.required,
+          Validators.minLength(7),
+          Validators.maxLength(7),
+          Validators.pattern('[0-9]+')
+        ])
       ])
     });
   }
+
+  get phones(): FormArray {
+    return this.form.get('phones') as FormArray;
+  }
+
 
   isFieldInvalid(field: string) {
     return (
@@ -59,5 +82,14 @@ export class RegistrationComponent implements OnInit {
   public onFileChange(event) {
     const files = event.srcElement.files;
     console.log(files);
+    this.fileUploadService.uploadImage(files[0]).subscribe(value => this.form.get('photo').setValue(value));
+  }
+
+  // getActiveRegionCities() {
+  //   return this.regions.find(region => region.id === this.form.value.regions).cities;
+  // }
+
+  get cities() {
+    return this.regions.find(region => region.id === this.activeRegionId).cities;
   }
 }

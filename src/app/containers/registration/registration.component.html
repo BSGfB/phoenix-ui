@@ -4,6 +4,14 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <p>Registration form</p>
 
+        <div class="full-width-input">
+          <input type="file" accept="image/*" (change)="onFileChange($event)" hidden #file>
+          <input type="text" formControlName="photo" hidden>
+          <mat-icon class="size-45" *ngIf="form.value.photo === ''" (click)="file.click()">photo</mat-icon>
+          <img *ngIf="form.value.photo !== ''" class="form-image" [src]="form.value.photo" (click)="file.click()">
+          <mat-error *ngIf="form.value.photo === ''">Please select your photo</mat-error>
+        </div>
+
         <mat-input-container class="full-width-input">
           <input matInput placeholder="First name" formControlName="firstName" type="text" required>
           <mat-error *ngIf="isFieldInvalid('firstName')">Please inform your first name</mat-error>
@@ -30,12 +38,37 @@
         </mat-input-container>
 
         <mat-input-container class="full-width-input">
-          <mat-select placeholder="Regions" formControlName="regions">
-            <mat-option *ngFor="let region of regions" [value]="region.id">
+          <mat-select placeholder="Cities" formControlName="gender">
+            <mat-option value="F">Female</mat-option>
+            <mat-option value="M">Male</mat-option>
+          </mat-select>
+          <mat-error *ngIf="isFieldInvalid('gender')">Please inform your gender</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <mat-select placeholder="Regions" (selectionChange)="activeRegionId = $event.value">
+            <mat-option *ngFor="let region of regions" [value]="region.id" >
               {{ region.name }}
             </mat-option>
           </mat-select>
         </mat-input-container>
+
+        <mat-input-container class="full-width-input" *ngIf="activeRegionId">
+          <mat-select placeholder="Cities" formControlName="cityId">
+            <mat-option *ngFor="let city of cities" [value]="city.id">
+              {{ city.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="isFieldInvalid('cityId')">Please inform your city</mat-error>
+        </mat-input-container>
+
+        <div formArrayName="phones">
+          <mat-input-container class="full-width-input" *ngFor="let phone of phones.controls; index as i">
+            <span matPrefix>+375 &nbsp;</span>
+            <input matInput type="tel" [placeholder]="'Phone number ' + (i + 1)" [formControlName]="i">
+            <mat-error *ngIf="isFieldInvalid('phones.' + i)">Please inform your phone number</mat-error>
+          </mat-input-container>
+        </div>
 
         <button mat-raised-button color="primary" type="submit">Login</button>
       </form>

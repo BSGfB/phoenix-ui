@@ -9,3 +9,14 @@ mat-card {
 .full-width-input {
   width: 100%;
 }
+
+.form-image {
+  width: 250px;
+}
+
+.size-45 {
+  font-size: 45px;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+}
