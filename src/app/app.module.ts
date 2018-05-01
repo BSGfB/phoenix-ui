@@ -5,16 +5,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainersModule } from './containers/containers.module';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent, PageNotFoundComponent, ProfileComponent, SubmitComponent } from './containers';
+import { LoginComponent, ProfileComponent, RegistrationComponent, SubmitComponent } from './containers';
 import { HttpClientModule } from '@angular/common/http';
-import { FileUploadService, AuthService, AuthGuardService } from './service';
+import { AuthGuardService, AuthService, FileUploadService } from './service';
 import { CoreModule } from './components';
+import { CommonService } from './service/common.service';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'submit', component: SubmitComponent, canActivate: [AuthGuardService]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'registration', component: RegistrationComponent},
   {path: '**', redirectTo: 'profile'}
 ];
 
@@ -33,7 +35,12 @@ const appRoutes: Routes = [
     ContainersModule,
     CoreModule
   ],
-  providers: [FileUploadService, AuthService, AuthGuardService],
+  providers: [
+    FileUploadService,
+    AuthService,
+    AuthGuardService,
+    CommonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

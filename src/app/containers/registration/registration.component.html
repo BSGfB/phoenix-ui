@@ -1,5 +1,45 @@
 <div class="registration-content">
   <mat-card>
-    Registration
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <p>Registration form</p>
+
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="First name" formControlName="firstName" type="text" required>
+          <mat-error *ngIf="isFieldInvalid('firstName')">Please inform your first name</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="Last name" formControlName="lastName" type="text" required>
+          <mat-error *ngIf="isFieldInvalid('lastName')">Please inform your last name</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="Email" formControlName="email" type="email" required>
+          <mat-error *ngIf="isFieldInvalid('email')">Please inform your email</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <input matInput placeholder="Birthday" formControlName="birthday" type="date" required>
+          <mat-error *ngIf="isFieldInvalid('birthday')">Please inform your birthday</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <input matInput type="password" placeholder="Password" formControlName="password" required>
+          <mat-error *ngIf="isFieldInvalid('password')">Please inform your password</mat-error>
+        </mat-input-container>
+
+        <mat-input-container class="full-width-input">
+          <mat-select placeholder="Regions" formControlName="regions">
+            <mat-option *ngFor="let region of regions" [value]="region.id">
+              {{ region.name }}
+            </mat-option>
+          </mat-select>
+        </mat-input-container>
+
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+    </mat-card-content>
+    <mat-card-footer><pre style="text-align: left;">{{form.value | json}}</pre></mat-card-footer>
   </mat-card>
 </div>

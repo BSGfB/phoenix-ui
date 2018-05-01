@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { SubmitComponent, PageNotFoundComponent, LoginComponent, RegistrationComponent, ProfileComponent } from './index';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { SubmitComponent, PageNotFoundComponent, LoginComponent, RegistrationCom
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   declarations: [SubmitComponent, PageNotFoundComponent, LoginComponent, RegistrationComponent, ProfileComponent],
   exports: [SubmitComponent, PageNotFoundComponent, LoginComponent]
