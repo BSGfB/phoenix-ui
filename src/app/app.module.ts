@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService, AuthService, FileUploadService } from './service';
 import { CoreModule } from './components';
 import { CommonService } from './service/common.service';
+import { UserService } from './service/user.service';
 
 
 const appRoutes: Routes = [
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     FileUploadService,
     AuthService,
     AuthGuardService,
-    CommonService
+    CommonService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

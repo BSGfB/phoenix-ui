@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../service/common.service';
 import { FileUploadService } from '../../service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,10 +16,10 @@ export class RegistrationComponent implements OnInit {
   public form: FormGroup;
   private formSubmitAttempt: boolean;
 
-
   constructor(
     private commonService: CommonService,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private userService: UserService
   ) {
   }
 
@@ -55,8 +56,8 @@ export class RegistrationComponent implements OnInit {
       phones: new FormArray([
         new FormControl('', [
           Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(7),
+          Validators.minLength(9),
+          Validators.maxLength(9),
           Validators.pattern('[0-9]+')
         ])
       ])
@@ -67,7 +68,6 @@ export class RegistrationComponent implements OnInit {
     return this.form.get('phones') as FormArray;
   }
 
-
   isFieldInvalid(field: string) {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
@@ -76,7 +76,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-
+    if (this.form.valid) {
+      this.userService.save(this.form.value).subscribe(value => console.log(value));
+    }
   }
 
   public onFileChange(event) {
@@ -84,10 +86,6 @@ export class RegistrationComponent implements OnInit {
     console.log(files);
     this.fileUploadService.uploadImage(files[0]).subscribe(value => this.form.get('photo').setValue(value));
   }
-
-  // getActiveRegionCities() {
-  //   return this.regions.find(region => region.id === this.form.value.regions).cities;
-  // }
 
   get cities() {
     return this.regions.find(region => region.id === this.activeRegionId).cities;
