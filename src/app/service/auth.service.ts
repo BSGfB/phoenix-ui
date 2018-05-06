@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuth') === 'true');
   private pathLogin = '/login';
 
   get isLoggedIn(): Observable<boolean> {
@@ -28,16 +28,15 @@ export class AuthService {
       this.tryToLogin(user).subscribe(value => {
         this.loggedIn.next(true);
         this.router.navigate(['/']);
-
-        console.log(this.loggedIn.getValue(), 'kek');
+        localStorage.setItem('isAuth', 'true');
       });
 
     }
   }
 
   logout() {
-    console.log('logout')
     this.loggedIn.next(false);
+    localStorage.setItem('isAuth', 'false');
     this.router.navigate(['/login']);
   }
 
