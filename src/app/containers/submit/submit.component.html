@@ -1,7 +1,7 @@
 <mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
-  <mat-step [completed]="true">
+  <mat-step [completed]="isValidPhotos">
     <ng-template matStepLabel>Photos</ng-template>
-    <app-submit-photos></app-submit-photos>
+    <app-submit-photos (isValid)="isValidPhotos = $event"></app-submit-photos>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Description</ng-template>

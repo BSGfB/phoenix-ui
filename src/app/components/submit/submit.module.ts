@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule} from '@angular/material/grid-list';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   SubmitAboutComponent,
   SubmitDescriptionComponent,
@@ -26,7 +27,9 @@ import {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     SubmitDescriptionComponent,

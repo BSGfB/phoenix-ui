@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-submit-about',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./submit-about.component.css']
 })
 export class SubmitAboutComponent implements OnInit {
+
+  public form: FormGroup;
 
   constructor() { }
 

@@ -1,8 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="mat-typography">Phoenix</span>
+    <span class="mat-typography title">Phoenix</span>
+    <span class="spacer"></span>
     <button mat-button routerLink="submit" *ngIf="isLoggedIn"><mat-icon>add</mat-icon></button>
-    <span class="example-spacer"></span>
+    <span class="spacer"></span>
     <button mat-button routerLink="login" *ngIf="!isLoggedIn" class="mat-typography">Sign in</button>
     <button mat-button routerLink="registration" *ngIf="!isLoggedIn" class="mat-typography">Sing up</button>
     <button mat-button (click)="onLogout()" *ngIf="isLoggedIn" class="mat-typography">Logout</button>

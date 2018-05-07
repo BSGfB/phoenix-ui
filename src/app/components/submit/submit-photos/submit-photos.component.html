@@ -2,13 +2,24 @@
 
   <div class="add">
     <input type="file" accept="image/*" style="display:none;" (change)="onFileChange($event)" #file>
-    <button mat-fab color="primary" (click)="file.click()"><mat-icon>add</mat-icon></button>
+    <button mat-fab color="primary" (click)="file.click()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 
-
   <mat-grid-list [cols]="2" rowHeight="1:1">
-    <mat-grid-tile *ngFor="let url of photos">
-      <img class="form-image" [src]="url">
+    <mat-grid-tile *ngFor="let item of photos">
+      <img class="form-image" [src]="item.value">
     </mat-grid-tile>
   </mat-grid-list>
+
+  <form [formGroup]="form">
+    <div formArrayName="photos">
+      <input matInput type="text" *ngFor="let item of photos; index as i" [formControlName]="i" hidden>
+      <mat-error *ngIf="photos.length === 0">Please load some item photos</mat-error>
+    </div>
+    <button mat-raised-button color="accent" (click)="onSubmit()" matStepperNext>Next</button>
+  </form>
+
+  <pre>{{form.getRawValue() | json}}</pre>
 </div>
