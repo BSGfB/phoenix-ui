@@ -7,11 +7,10 @@ import { ContainersModule } from './containers/containers.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent, ProfileComponent, RegistrationComponent, SubmitComponent } from './containers';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuardService, AuthService, FileUploadService } from './service';
+import { AuthGuardService, AuthService, FileUploadService, CategoryClassificationService } from './service';
 import { CoreModule } from './components';
 import { CommonService } from './service/common.service';
 import { UserService } from './service/user.service';
-
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -41,7 +40,8 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuardService,
     CommonService,
-    UserService
+    UserService,
+    CategoryClassificationService
   ],
   bootstrap: [AppComponent]
 })

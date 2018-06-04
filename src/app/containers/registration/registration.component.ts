@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../service/common.service';
 import { FileUploadService } from '../../service';
 import { UserService } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private commonService: CommonService,
     private fileUploadService: FileUploadService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
   }
 
@@ -77,7 +79,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.userService.save(this.form.value).subscribe(value => console.log(value));
+      this.userService.save(this.form.value).subscribe(v => this.router.navigate(['/login']));
     }
   }
 

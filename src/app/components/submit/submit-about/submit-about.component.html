@@ -1,15 +1,15 @@
 <div class="submit-form">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Name">
+    <input matInput placeholder="Name" [value]="firstName">
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <input matInput placeholder="Email" type="email">
+    <input matInput placeholder="Email" type="email" [value]="email">
   </mat-form-field>
 
   <mat-form-field class="full-width">
     <span matPrefix>+375 &nbsp;</span>
-    <input type="tel" matInput placeholder="Phone number 1">
+    <input type="tel" matInput placeholder="Phone number 1" [value]="phone ? phone.substring(3) : ''">
   </mat-form-field>
 
   <mat-form-field class="full-width">
@@ -18,5 +18,6 @@
   </mat-form-field>
 
 
-  <button mat-raised-button color="accent" onclick="">Next</button>
+  <button mat-raised-button color="accent" onclick="" matStepperPrevious="">Back</button>
+  <button mat-raised-button color="accent" onclick="" matStepperNext>Next</button>
 </div>

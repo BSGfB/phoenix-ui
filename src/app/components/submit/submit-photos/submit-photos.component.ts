@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FileUploadService } from '../../../service';
+import {CategoryClassificationService, FileUploadService} from '../../../service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,12 +9,16 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class SubmitPhotosComponent implements OnInit {
 
+  @Output() public onChange = new EventEmitter<any>();
   @Output() public isValid = new EventEmitter<boolean>();
 
   public photos = [];
+  public photosWithCategories = [];
   public form: FormGroup;
 
-  constructor(private fileUploadService: FileUploadService) {
+  constructor(
+    private fileUploadService: FileUploadService,
+    private categoryClassificationService: CategoryClassificationService) {
   }
 
   ngOnInit() {
@@ -27,7 +31,20 @@ export class SubmitPhotosComponent implements OnInit {
     const files = event.srcElement.files;
     this.fileUploadService
       .uploadImage(files[0])
-      .subscribe(value => this.photos.push(new FormControl(value, [Validators.required])));
+      .subscribe(value => {
+        this.photos.push(new FormControl(value, [Validators.required]));
+
+        this.categoryClassificationService.try(value).subscribe(res => {
+          this.photosWithCategories.push({url: value, categories: res});
+          this.onChange.emit(this.photosWithCategories);
+        });
+
+        if (this.photos.length > 0) {
+          this.onChange.emit(true);
+        } else {
+          this.onChange.emit(false);
+        }
+      });
   }
 
   isFieldInvalid(field: string) {
@@ -38,10 +55,5 @@ export class SubmitPhotosComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.photos.length > 0) {
-      this.isValid.emit(true);
-    } else {
-      this.isValid.emit(false);
-    }
   }
 }

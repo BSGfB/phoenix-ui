@@ -1,35 +1,51 @@
-<div class="submit-form">
+<div class="submit-form" [formGroup]="form">
   <mat-form-field class="full-width">
-    <input matInput placeholder="Title">
+    <input matInput placeholder="Title" formControlName="title" required>
+    <mat-error *ngIf="isFieldInvalid('title')">Please inform title</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-select placeholder="Select category">
-      <mat-option value="category1">Category 1</mat-option>
-      <mat-option value="category2">Category 2</mat-option>
-      <mat-option value="category2">Category 3</mat-option>
-    </mat-select>
+    <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+    <mat-error *ngIf="isFieldInvalid('description')">Please inform description</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <mat-select value="sell">
+    <mat-select value="sell" formControlName="type" placeholder="Type">
       <mat-option value="sell">Sell</mat-option>
       <mat-option value="buy">Buy</mat-option>
     </mat-select>
+    <mat-error *ngIf="isFieldInvalid('type')">Please inform type</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <textarea matInput placeholder="Description"></textarea>
+    <mat-select placeholder="Select common category" (selectionChange)="activeCommonCategoryId = $event.value" [(value)]="activeCommonCategoryId">
+      <mat-option *ngFor="let commonCategory of commonCategories" [value]="commonCategory.id">
+        {{ commonCategory.name }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
+
+  <mat-input-container class="full-width" *ngIf="activeCommonCategoryId">
+    <mat-select placeholder="Category" formControlName="categoryId" [(value)]="activeCategoryId">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="isFieldInvalid('categoryId')">Please inform category</mat-error>
+  </mat-input-container>
 
   <div class="row full-width">
     <mat-form-field>
-      <input matInput placeholder="Rubles" type="number" min="0"/>
+      <input matInput placeholder="Rubles" type="number" min="0" formControlName="rubles" required/>
+      <mat-error *ngIf="isFieldInvalid('rubles')">Please inform rubles</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Pennies" type="number" min="0"/>
+      <input matInput placeholder="Pennies" type="number" min="0" formControlName="pennies" required/>
+      <mat-error *ngIf="isFieldInvalid('pennies')">Please inform pennies</mat-error>
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="accent" onclick="">Next</button>
+  <button mat-raised-button color="accent" onclick="" matStepperPrevious="">Back</button>
+  <button mat-raised-button color="accent" onclick="" matStepperNext>Next</button>
+
 </div>

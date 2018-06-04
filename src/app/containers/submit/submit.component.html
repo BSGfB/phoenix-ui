@@ -1,19 +1,20 @@
 <mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
-  <mat-step [completed]="isValidPhotos">
+  <!--<mat-step [completed]="isValidPhotos">-->
+  <mat-step>
     <ng-template matStepLabel>Photos</ng-template>
-    <app-submit-photos (isValid)="isValidPhotos = $event"></app-submit-photos>
+    <app-submit-photos (onChange)="onPhotosChange($event)" (isValid)="isValidPhotos = $event"></app-submit-photos>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Description</ng-template>
-    <app-submit-description></app-submit-description>
+    <app-submit-description [commonCategories]="categories" [photosWithCategories]="possibleCategories"></app-submit-description>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Location</ng-template>
-    <app-location></app-location>
+    <app-location [activeCityId]="cityId" [regions]="regions"></app-location>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>About the seller</ng-template>
-    <app-submit-about></app-submit-about>
+    <app-submit-about [email]="email" [firstName]="firstName" [phone]="phone"></app-submit-about>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Submit</ng-template>

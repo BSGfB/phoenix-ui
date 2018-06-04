@@ -19,4 +19,12 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout();
   }
+
+  get userPhoto() {
+    return this.authService.userPhoto;
+  }
+
+  get userEmail() {
+    return this.authService.userEmail;
+  }
 }

@@ -34,4 +34,15 @@ export class UserService {
       {responseType: 'json', headers: headers, params: params
       });
   }
+
+  getByEmail(email: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Accept': '*/*'
+    });
+
+    return this.http.get(
+      HOST_SHOP + this.pathUsers + '/byEmail/' + email,
+      {responseType: 'json', headers: headers
+      });
+  }
 }

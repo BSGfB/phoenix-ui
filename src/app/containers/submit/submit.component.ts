@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {CommonService} from '../../service/common.service';
+import {AuthService} from '../../service';
 
 @Component({
   selector: 'app-submit',
@@ -9,14 +10,40 @@ import { FormGroup } from '@angular/forms';
 export class SubmitComponent implements OnInit {
 
   public isValidPhotos = false;
+  public possibleCategories = [];
 
-  constructor() { }
+  public categories;
+  public regions;
+
+  constructor(
+    private commonService: CommonService,
+    private authService: AuthService) {
+    this.commonService.findAllCategories().subscribe(value => this.categories = value);
+    this.commonService.findAllRegions().subscribe(value => this.regions = value);
+  }
 
   ngOnInit() {
   }
 
-  test(event) {
-    console.log(event);
+  public onPhotosChange(photosEvent) {
+    this.possibleCategories = photosEvent.map(v => v.categories);
   }
+
+  get cityId() {
+    return this.authService.userCityId;
+  }
+
+  get email() {
+    return this.authService.userEmail;
+  }
+
+  get firstName() {
+    return this.authService.userFirstName;
+  }
+
+  get phone() {
+    return this.authService.userPhone;
+  }
+
 
 }

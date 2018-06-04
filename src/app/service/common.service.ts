@@ -7,15 +7,19 @@ import { Observable } from 'rxjs/Observable';
 export class CommonService {
 
   private pathRegions = '/regions';
+  private pathCategories = '/categories';
+
+  private headers = new HttpHeaders({
+    'Accept': '*/*'
+  });
 
   constructor(private http: HttpClient) { }
 
   findAllRegions(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Accept': '*/*'
-    });
+    return this.http.get(HOST_SHOP + this.pathRegions, {responseType: 'json', headers: this.headers});
+  }
 
-
-    return this.http.get(HOST_SHOP + this.pathRegions, {responseType: 'json', headers: headers});
+  findAllCategories(): Observable<any> {
+    return this.http.get(HOST_SHOP + this.pathCategories, {responseType: 'json', headers: this.headers});
   }
 }

@@ -1,11 +1,33 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span class="mat-typography title">Phoenix</span>
+
     <span class="spacer"></span>
-    <button mat-button routerLink="submit" *ngIf="isLoggedIn"><mat-icon>add</mat-icon></button>
+    <button mat-button routerLink="submit" *ngIf="isLoggedIn">
+      <mat-icon>add</mat-icon>
+    </button>
     <span class="spacer"></span>
+
+    <div *ngIf="isLoggedIn">
+      <div [matMenuTriggerFor]="menu" class="user-space">
+        <img [src]="userPhoto" class="user-photo"/>
+        <span class="mat-typography">{{userEmail}}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>perm_identity</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="onLogout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+
     <button mat-button routerLink="login" *ngIf="!isLoggedIn" class="mat-typography">Sign in</button>
     <button mat-button routerLink="registration" *ngIf="!isLoggedIn" class="mat-typography">Sing up</button>
-    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn" class="mat-typography">Logout</button>
+    <!--<button mat-button (click)="onLogout()" *ngIf="isLoggedIn" class="mat-typography">Logout</button>-->
   </mat-toolbar-row>
 </mat-toolbar>

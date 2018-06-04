@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,10 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./submit-about.component.css']
 })
 export class SubmitAboutComponent implements OnInit {
+
+  @Input() public firstName;
+  @Input() public email;
+  @Input() public phone;
 
   public form: FormGroup;
 
