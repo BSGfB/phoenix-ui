@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -10,6 +10,8 @@ export class SubmitLocationComponent implements OnInit, OnChanges {
 
   @Input() public regions;
   @Input() public activeCityId;
+
+  @Output() public isValid = new EventEmitter();
 
   public activeRegionId: number;
   public form: FormGroup;
@@ -44,5 +46,9 @@ export class SubmitLocationComponent implements OnInit, OnChanges {
       this.activeRegionId = this.regions.find(r => r.cities.find(c => c.id === this.activeCityId) !== undefined).id;
       this.form.get('cityId').setValue(this.activeCityId);
     }
+  }
+
+  onSubmit() {
+    this.isValid.emit({isValid: this.form.valid, body: this.form.getRawValue()});
   }
 }

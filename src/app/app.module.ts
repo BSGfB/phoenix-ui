@@ -7,7 +7,7 @@ import { ContainersModule } from './containers/containers.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent, ProfileComponent, RegistrationComponent, SubmitComponent } from './containers';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuardService, AuthService, FileUploadService, CategoryClassificationService } from './service';
+import { AuthGuardService, AuthService, FileUploadService, CategoryClassificationService, ProductService } from './service';
 import { CoreModule } from './components';
 import { CommonService } from './service/common.service';
 import { UserService } from './service/user.service';
@@ -41,7 +41,8 @@ const appRoutes: Routes = [
     AuthGuardService,
     CommonService,
     UserService,
-    CategoryClassificationService
+    CategoryClassificationService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

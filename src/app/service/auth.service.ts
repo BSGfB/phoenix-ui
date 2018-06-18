@@ -18,6 +18,7 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(localStorage.getItem('isAuth') === 'true');
   private pathLogin = '/login';
+  private pathLogout = '/logout';
 
   get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
@@ -51,9 +52,17 @@ export class AuthService {
   }
 
   logout() {
-    this.loggedIn.next(false);
-    localStorage.setItem('isAuth', 'false');
-    this.router.navigate(['/login']);
+    const headers = new HttpHeaders({
+      'Accept': '*/*'
+    });
+
+    this.http.get(HOST_SHOP + this.pathLogout, {responseType: 'text', headers: headers}).subscribe(v => {
+      this.loggedIn.next(false);
+      localStorage.clear();
+      localStorage.setItem('isAuth', 'false');
+      this.router.navigate(['/login']);
+    });
+
   }
 
   private tryToLogin(user: AuthUser): Observable<any> {
@@ -63,7 +72,7 @@ export class AuthService {
       'Accept': '*/*'
     });
 
-    return this.http.post(HOST_SHOP + this.pathLogin, body, {responseType: 'text', headers: headers});
+    return this.http.post(HOST_SHOP + this.pathLogin, body, {withCredentials: true, responseType: 'text', headers: headers});
   }
 
   get userCityId() {

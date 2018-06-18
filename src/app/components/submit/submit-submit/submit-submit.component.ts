@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Product} from '../../../model/product';
+import {ProductService} from '../../../service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-submit-submit',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmitSubmitComponent implements OnInit {
 
-  constructor() { }
+  @Input() public product = new Product();
+
+  constructor(private productService: ProductService, private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  public onClick() {
+    this.productService.save(this.product).subscribe(value => this.router.navigate(['/']));
   }
 
 }

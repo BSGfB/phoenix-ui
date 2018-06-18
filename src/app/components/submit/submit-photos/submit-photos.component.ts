@@ -8,9 +8,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./submit-photos.component.css']
 })
 export class SubmitPhotosComponent implements OnInit {
-
   @Output() public onChange = new EventEmitter<any>();
-  @Output() public isValid = new EventEmitter<boolean>();
+  @Output() public isValid = new EventEmitter();
 
   public photos = [];
   public photosWithCategories = [];
@@ -40,9 +39,9 @@ export class SubmitPhotosComponent implements OnInit {
         });
 
         if (this.photos.length > 0) {
-          this.onChange.emit(true);
+          this.isValid.emit({isValid: true, photos: this.photos.map(v => v.value)});
         } else {
-          this.onChange.emit(false);
+          this.isValid.emit({isValid: true, photos: []});
         }
       });
   }
@@ -55,5 +54,10 @@ export class SubmitPhotosComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.photos.length > 0) {
+      this.isValid.emit({isValid: true, photos: this.photos.map(v => v.value)});
+    } else {
+      this.isValid.emit({isValid: true, photos: []});
+    }
   }
 }

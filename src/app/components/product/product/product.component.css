@@ -1,0 +1,17 @@
+.product-card {
+  max-width: 300px;
+  margin: 25px;
+}
+
+.product-photo {
+  text-align: center;
+}
+
+.product-photo > img {
+  height: 300px;
+  width: auto;
+}
+
+.photo-bar {
+  margin: 0 10px;
+}

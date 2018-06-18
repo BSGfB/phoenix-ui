@@ -1,16 +1,16 @@
 <mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
   <!--<mat-step [completed]="isValidPhotos">-->
-  <mat-step>
+  <mat-step [completed]="isValidPhotos">
     <ng-template matStepLabel>Photos</ng-template>
-    <app-submit-photos (onChange)="onPhotosChange($event)" (isValid)="isValidPhotos = $event"></app-submit-photos>
+    <app-submit-photos (onChange)="onPhotosChange($event)" (isValid)="onValidPhotos($event)"></app-submit-photos>
   </mat-step>
-  <mat-step>
+  <mat-step [completed]="isValidDescription">
     <ng-template matStepLabel>Description</ng-template>
-    <app-submit-description [commonCategories]="categories" [photosWithCategories]="possibleCategories"></app-submit-description>
+    <app-submit-description [commonCategories]="categories" [photosWithCategories]="possibleCategories" (isValid)="onValidDescription($event)"></app-submit-description>
   </mat-step>
-  <mat-step>
+  <mat-step [completed]="isValidLocation">
     <ng-template matStepLabel>Location</ng-template>
-    <app-location [activeCityId]="cityId" [regions]="regions"></app-location>
+    <app-location [activeCityId]="cityId" [regions]="regions" (isValid)="onValidLocation($event)"></app-location>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>About the seller</ng-template>
@@ -18,6 +18,6 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Submit</ng-template>
-    <app-submit-submit></app-submit-submit>
+    <app-submit-submit [product]="product"></app-submit-submit>
   </mat-step>
 </mat-horizontal-stepper>

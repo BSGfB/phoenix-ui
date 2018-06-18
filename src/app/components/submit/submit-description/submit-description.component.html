@@ -11,11 +11,16 @@
 
   <mat-form-field class="full-width">
     <mat-select value="sell" formControlName="type" placeholder="Type">
-      <mat-option value="sell">Sell</mat-option>
-      <mat-option value="buy">Buy</mat-option>
+      <mat-option value="S">Sell</mat-option>
+      <mat-option value="B">Buy</mat-option>
     </mat-select>
     <mat-error *ngIf="isFieldInvalid('type')">Please inform type</mat-error>
   </mat-form-field>
+
+  <div class="button-row" *ngIf="topResults.length > 0">
+    <div class="mat-typography">It can be one of them: </div>
+    <button mat-button color="primary" *ngFor="let item of topResults" (click)="setUpCategory(item[0])">{{item[0]}}</button>
+  </div>
 
   <mat-form-field class="full-width">
     <mat-select placeholder="Select common category" (selectionChange)="activeCommonCategoryId = $event.value" [(value)]="activeCommonCategoryId">
@@ -45,7 +50,7 @@
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="accent" onclick="" matStepperPrevious="">Back</button>
-  <button mat-raised-button color="accent" onclick="" matStepperNext>Next</button>
+  <button mat-raised-button color="accent" onclick="" matStepperPrevious>Back</button>
+  <button mat-raised-button color="accent" onclick="" (click)="onSubmit()" matStepperNext>Next</button>
 
 </div>
